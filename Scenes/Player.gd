@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-enum {IDLE, RUN, AIR, WALL_SLIDE}
+enum {IDLE, RUN, AIR, WALL}
 
 const MAX_SPEED = 400
 const ACCELERATION = 1000
 const GRAVITY = 1000
-const JUMP_STRENGHT = -410
+const JUMP_STRENGHT = -800
 
 var direction_x = "RIGHT"
 var velocity := Vector2.ZERO
@@ -13,6 +13,7 @@ var direction := Vector2.ZERO
 
 var offset = Vector2(0, 5)
 var state = IDLE
+var is_climb :bool
 
 var can_jump = true
 
@@ -26,6 +27,8 @@ func _physics_process(delta: float) -> void:
 			_run_state(delta)
 		AIR:
 			_air_state(delta)
+		WALL:
+			_wall_state(delta)
 
 
 func _apply_basic_movement(delta) -> void:
@@ -103,5 +106,12 @@ func _air_state(delta) -> void:
 		can_jump = true
 		return
 
+func _wall_state(delta) -> void:
+	is_climb = ($Dw.is_colliding() == true and $Up.is_colliding() == false)
+	if is_climb == false:
+		velocity.y += 40
+	else:
+		velocity.y = 0
+	
 
 	
