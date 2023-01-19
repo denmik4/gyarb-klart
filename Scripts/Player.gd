@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 			_dodge_state(delta)
 		DODGE_RUN:
 			_dodge_run_state(delta)
+			
 
 
 func _apply_basic_movement(delta) -> void:
