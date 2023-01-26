@@ -216,10 +216,22 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("PushHitBox2:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "Push"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Area2D/PushHitBox:disabled")
 tracks/0/interp = 1
@@ -255,6 +267,30 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 18, 19 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("PushHitBox2:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -317,6 +353,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("PushHitBox2:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -504,6 +552,10 @@ shape = SubResource( 14 )
 current = true
 zoom = Vector2( 2, 2 )
 smoothing_enabled = true
+
+[node name="PushHitBox2" type="CollisionShape2D" parent="."]
+position = Vector2( -2, 15 )
+shape = SubResource( 14 )
 
 [node name="AirStateHitBox" type="CollisionShape2D" parent="."]
 position = Vector2( 3, 10 )

@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-enum {IDLE, RUN, AIR, WALL, ATTACK, DODGE, DODGE_RUN}
+enum {IDLE, RUN, AIR, WALL, ATTACK, DODGE, DODGE_RUN, PUSH}
 
 const MAX_SPEED = 400
 const ACCELERATION = 1000
@@ -34,7 +34,9 @@ func _physics_process(delta: float) -> void:
 			_dodge_state(delta)
 		DODGE_RUN:
 			_dodge_run_state(delta)
-			
+		PUSH:
+			_push_state(delta)
+		
 
 
 func _apply_basic_movement(delta) -> void:
@@ -235,7 +237,51 @@ func _dodge_run_state(delta) -> void:
 	
 	
 	
+func _push_state(delta) -> void:
+	animationplayer.play("Push")
+	yield(get_tree().create_timer(0.20), "timeout")
+	direction.x = _get_input_x_update_direction()
+	if direction.x == 1:
+		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED - 200, ACCELERATION*delta)
+	elif direction.x == -1:
+		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED + 200, ACCELERATION*delta)
+		
+	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left"):
+		state = IDLE
+		return
+	
+	if Input.is_mouse_button_pressed(1):
+		state = ATTACK
+		return
+	
+	
+	if Input.is_action_just_pressed("jump") and can_jump:
+		velocity.y = JUMP_STRENGHT
+		can_jump = false
+		state = AIR
+		animationplayer.play("Jump_UP")
+		return
 
 #func _on_Area2D_area_entered(area):
 	#if area.is_in_group
 	
+
+
+
+
+func _on_MovableObjekt_push() -> void:
+	direction.x = _get_input_x_update_direction()
+	if direction.x == 1:
+		velocity.x = 0
+	elif direction.x == -1:
+		velocity.x = 0
+	
+	velocity = move_and_slide(velocity, Vector2.UP)
+	state = PUSH
+
+
+
+func _on_MovableObjekt_idle() -> void:
+	state = IDLE
