@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-enum {IDLE, RUN, AIR, WALL, ATTACK, DODGE, DODGE_RUN, PUSH}
+enum {IDLE, RUN, AIR, WALL, ATTACK, DODGE, DODGE_RUN, PUSH_IDLE, PUSH_ACTIVE}
 
 const MAX_SPEED = 400
 const ACCELERATION = 1000
@@ -15,6 +15,7 @@ var state = IDLE
 var is_climb :bool
 
 var can_jump = true
+var can_push = false
 
 onready var animationplayer = $AnimationPlayer
 
@@ -34,8 +35,10 @@ func _physics_process(delta: float) -> void:
 			_dodge_state(delta)
 		DODGE_RUN:
 			_dodge_run_state(delta)
-		PUSH:
+		PUSH_ACTIVE:
 			_push_state(delta)
+		PUSH_IDLE:
+			_push_idle_state(delta)
 		
 
 
@@ -86,6 +89,8 @@ func _idle_state(delta) -> void:
 		state = DODGE
 		return
 		
+	if can_push and Input.is_action_just_pressed("push"):
+		state = PUSH_IDLE
 
 
 
@@ -121,6 +126,9 @@ func _run_state(delta) -> void:
 		yield(get_tree().create_timer(0.25), "timeout")
 		state = DODGE
 		return
+		
+	if can_push and Input.is_action_just_pressed("push"):
+		state = PUSH_IDLE
 
 func _air_state(delta) -> void:
 	velocity.y = velocity.y + GRAVITY * delta if velocity.y + GRAVITY * delta < 500 else 500 
@@ -205,6 +213,9 @@ func _dodge_state(delta) -> void:
 		animationplayer.play("Idle")
 		return
 	
+	if can_push and Input.is_action_just_pressed("push"):
+		state = PUSH_IDLE
+	
 	
 	
 func _dodge_run_state(delta) -> void:
@@ -215,6 +226,10 @@ func _dodge_run_state(delta) -> void:
 		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED - 300, ACCELERATION*delta)
 	elif direction.x == -1:
 		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED + 300, ACCELERATION*delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
+		state = DODGE
+		
 		
 	velocity = move_and_slide(velocity, Vector2.UP)
 	print(velocity)
@@ -234,23 +249,19 @@ func _dodge_run_state(delta) -> void:
 		state = AIR
 		animationplayer.play("Jump_UP")
 		return
-	
-	
-	
-func _push_state(delta) -> void:
-	animationplayer.play("Push")
-	yield(get_tree().create_timer(0.20), "timeout")
-	direction.x = _get_input_x_update_direction()
-	if direction.x == 1:
-		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED - 200, ACCELERATION*delta)
-	elif direction.x == -1:
-		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED + 200, ACCELERATION*delta)
 		
-	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left"):
+	
+
+func _push_idle_state(delta) -> void:
+	animationplayer.play("push_idle")
+	
+	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+		state = PUSH_ACTIVE
+	
+	if can_push == false or Input.is_action_just_pressed("push"):
 		state = IDLE
-		return
+	
 	
 	if Input.is_mouse_button_pressed(1):
 		state = ATTACK
@@ -263,14 +274,40 @@ func _push_state(delta) -> void:
 		state = AIR
 		animationplayer.play("Jump_UP")
 		return
-
-#func _on_Area2D_area_entered(area):
-	#if area.is_in_group
 	
+	if Input.is_action_just_pressed("dodge"):
+			animationplayer.play("Start_Dodge")
+			yield(get_tree().create_timer(0.25), "timeout")
+			state = DODGE
+			return
+	
+	
+	
+func _push_state(delta) -> void:
+	animationplayer.play("Push")
+	yield(get_tree().create_timer(0.20), "timeout")
+	
+	direction.x = _get_input_x_update_direction()
+	
+	if direction.x == 1:
+		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED, ACCELERATION*delta)
+	elif direction.x == -1:
+		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED, ACCELERATION*delta)
+	else:
+		state = PUSH_IDLE
+		
+	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if can_push == false or Input.is_action_just_released("move_left") or Input.is_action_just_released("move_right"):
+		state = IDLE
+		return
+		
+		
+		
 
 
 
-
+""""
 func _on_MovableObjekt_push() -> void:
 	direction.x = _get_input_x_update_direction()
 	if direction.x == 1:
@@ -280,8 +317,10 @@ func _on_MovableObjekt_push() -> void:
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	state = PUSH
+	
+	if state == PUSH:
+		animationplayer.play("Push")
+		yield(get_tree().create_timer(0.20), "timeout")
+"""""
 
 
-
-func _on_MovableObjekt_idle() -> void:
-	state = IDLE

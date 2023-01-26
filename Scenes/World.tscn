@@ -63,6 +63,3 @@ tile_data = PoolIntArray( -851963, 1, 0, -851962, 1, 0, -851961, 1, 0, -851960, 
 
 [node name="MovableObjekt" parent="." instance=ExtResource( 3 )]
 position = Vector2( 206, 108 )
-
-[connection signal="idle" from="MovableObjekt" to="KinematicBody2D" method="_on_MovableObjekt_idle"]
-[connection signal="push" from="MovableObjekt" to="KinematicBody2D" method="_on_MovableObjekt_push"]
