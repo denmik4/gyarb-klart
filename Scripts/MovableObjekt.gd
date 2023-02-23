@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 	if player:
 		if player.can_push and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and player.state == 8:
 			if player.direction.x == 1: 
-				velocity = player.velocity - bug_fix
+				velocity = player.velocity
 				velocity.y = 0
 				move_and_slide(velocity)
 			if player.direction.x == -1:

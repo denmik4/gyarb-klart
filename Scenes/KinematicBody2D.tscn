@@ -613,7 +613,7 @@ shape = SubResource( 14 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 4, 4 )
 smoothing_enabled = true
 
 [node name="PushHitBox2" type="CollisionShape2D" parent="."]

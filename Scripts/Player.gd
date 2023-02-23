@@ -226,9 +226,9 @@ func _dodge_run_state(delta) -> void:
 	print(direction_x)
 	
 	if direction.x == 1:
-		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED - 300, ACCELERATION*delta)
+		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED + 100, ACCELERATION*delta)
 	elif direction.x == -1:
-		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED + 300, ACCELERATION*delta)
+		velocity.x = move_toward(velocity.x, direction.x * MAX_SPEED - 100, ACCELERATION*delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
 		state = DODGE
@@ -254,7 +254,8 @@ func _dodge_run_state(delta) -> void:
 		animationplayer.play("Jump_UP")
 		return
 		
-	
+	if can_push and Input.is_action_just_pressed("push"):
+		state = PUSH_IDLE
 	
 
 func _push_idle_state(delta) -> void:
@@ -285,6 +286,11 @@ func _push_idle_state(delta) -> void:
 			yield(get_tree().create_timer(0.25), "timeout")
 			state = DODGE
 			return
+		
+	
+	if Input.is_action_just_pressed("push"):
+		animationplayer.play("Idle")
+		state = IDLE
 	
 	
 	
@@ -313,6 +319,8 @@ func _push_state(delta) -> void:
 		state = IDLE
 		return
 		
+	if can_push and Input.is_action_just_pressed("push"):
+		state = IDLE
 		
 		
 
