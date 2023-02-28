@@ -2,10 +2,10 @@ extends KinematicBody2D
 
 enum {IDLE, RUN, AIR, WALL, ATTACK, DODGE, DODGE_RUN, PUSH_IDLE, PUSH_ACTIVE}
 
-const MAX_SPEED = 400
+const MAX_SPEED = 600
 const ACCELERATION = 1000
-const GRAVITY = 1000
-const JUMP_STRENGHT = -850
+const GRAVITY = 2000
+const JUMP_STRENGHT = -1250
 
 var direction_x = "RIGHT"
 var velocity := Vector2.ZERO

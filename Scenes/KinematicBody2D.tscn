@@ -595,7 +595,8 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[node name="Player" type="KinematicBody2D" groups=["Player"]]
+[node name="Mästerkatten" type="KinematicBody2D" groups=["Player"]]
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -650,18 +651,22 @@ anims/push_idle = SubResource( 15 )
 position = Vector2( 0, -45 )
 enabled = true
 cast_to = Vector2( 25, 0 )
+collision_mask = 2
 
 [node name="Dw" type="RayCast2D" parent="."]
 position = Vector2( 0, -30 )
 enabled = true
 cast_to = Vector2( 25, 0 )
+collision_mask = 2
 
 [node name="UP" type="RayCast2D" parent="."]
 position = Vector2( 0, -45 )
 enabled = true
 cast_to = Vector2( -25, 0 )
+collision_mask = 2
 
 [node name="DW" type="RayCast2D" parent="."]
 position = Vector2( 0, -30 )
 enabled = true
 cast_to = Vector2( -25, 0 )
+collision_mask = 2
