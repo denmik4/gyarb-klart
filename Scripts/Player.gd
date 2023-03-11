@@ -6,10 +6,15 @@ const MAX_SPEED = 600
 const ACCELERATION = 1000
 const GRAVITY = 2000
 const JUMP_STRENGHT = -1250
+const FLOOR_NORMAL = Vector2.UP
+const SNAP_DIRECTION = Vector2.DOWN
+const SNAP_LENGHT = 32.0
+const FLOOR_MAX_ANGLE = deg2rad(50)
 
 var direction_x = "RIGHT"
 var velocity := Vector2.ZERO
 var direction := Vector2.ZERO
+var snap_vector = SNAP_DIRECTION * SNAP_LENGHT
 
 var state = IDLE
 var is_climb :bool
@@ -51,7 +56,10 @@ func _apply_basic_movement(delta) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, ACCELERATION*delta)
 	
 	velocity.y += GRAVITY*delta
-	velocity = move_and_slide(velocity, Vector2.UP)
+	#velocity = move_and_slide(velocity, Vector2.UP)
+	velocity.y = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, true, 4, FLOOR_MAX_ANGLE).y 
+	print(velocity)
+
 
 func _get_input_x_update_direction() -> float:
 	var input_x = Input.get_axis("move_left", "move_right")

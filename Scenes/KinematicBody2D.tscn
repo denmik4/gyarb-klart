@@ -385,7 +385,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HitBox:disabled")
+tracks/1/path = NodePath("PushHitBox2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -397,7 +397,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Area2D/PushHitBox:disabled")
+tracks/2/path = NodePath("HitBox:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
