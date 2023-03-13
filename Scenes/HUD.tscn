@@ -52,7 +52,7 @@ texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 1444.64, 655.56, 47.2028, 36.4332 )
 
-[node name="CurentCounterRed" type="Label" parent="CanvasLayer"]
+[node name="CurrentCounterRed" type="Label" parent="CanvasLayer"]
 modulate = Color( 1, 0, 0, 1 )
 margin_left = 58.0
 margin_top = 33.0
@@ -113,3 +113,10 @@ position = Vector2( 51, 151 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 1448.67, 595.384, 90.118, 45.3053 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+modulate = Color( 0.00784314, 1, 0, 1 )
+margin_left = 93.0
+margin_top = 141.0
+margin_right = 121.0
+margin_bottom = 168.0

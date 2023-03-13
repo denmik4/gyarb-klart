@@ -332,3 +332,7 @@ func _push_state(delta) -> void:
 		
 		
 
+
+
+func _on_Respawn_body_entered(body):
+	get_tree().change_scene("res://Scenes/World.tscn")

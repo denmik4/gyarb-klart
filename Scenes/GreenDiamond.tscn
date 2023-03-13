@@ -18,3 +18,5 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1497.94, 654.705, 50.1011, 37.6536 )
+
+[connection signal="body_entered" from="." to="." method="_on_GreenDiamond_body_entered"]
