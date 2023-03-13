@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/timer.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=2]
+[ext_resource path="res://Background/TiltWarp-Regular-VariableFont_XROT,YROT.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Tilemap/Items-_kopia_.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 3 )
+
+[node name="HUD" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" type="Label" parent="CanvasLayer"]
+margin_right = 100.0
+margin_bottom = 25.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "00:00:00"
+script = ExtResource( 1 )
+
+[node name="PanelRED" type="Panel" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.309804 )
+margin_left = 5.0
+margin_top = 40.0
+margin_right = 129.0
+margin_bottom = 80.0
+
+[node name="RedDiamond" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 30, 60 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1444.64, 655.56, 47.2028, 36.4332 )
+
+[node name="CurentCounterRed" type="Label" parent="CanvasLayer"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 33.0
+margin_right = 84.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+
+[node name="CounterRed" type="Label" parent="CanvasLayer"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 82.0
+margin_top = 33.0
+margin_right = 124.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 3 )
+text = "/5"
+
+[node name="PanelGreen" type="Panel" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.309804 )
+margin_left = 4.0
+margin_top = 87.0
+margin_right = 129.0
+margin_bottom = 127.0
+
+[node name="GreenDiamond" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 30, 107 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1500.59, 656.002, 43.8717, 35.8764 )
+
+[node name="CurrentCounterGreen" type="Label" parent="CanvasLayer"]
+modulate = Color( 0.478431, 1, 0.513726, 1 )
+margin_left = 56.0
+margin_top = 79.0
+margin_right = 91.0
+margin_bottom = 130.0
+custom_fonts/font = SubResource( 4 )
+text = "0"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color( 0.501961, 1, 0.521569, 1 )
+margin_left = 80.0
+margin_top = 80.0
+margin_right = 126.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 5 )
+text = "/4"
+
+[node name="PanelNycket" type="Panel" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.309804 )
+margin_left = 4.0
+margin_top = 133.0
+margin_right = 126.0
+margin_bottom = 173.0
+
+[node name="Nyckel" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 51, 151 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1448.67, 595.384, 90.118, 45.3053 )
