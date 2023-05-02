@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HUD/particle_pickup.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/ParticlesRED.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.511364 ), 0.0, 0.0, 0, 0, Vector2( 0.123762, 0.638636 ), 0.0, 0.0, 0, 0, Vector2( 0.985149, 0.0840909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.00558659, 0.988827, 0.994413, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 0, 0, 1, 1, 0.910112, 0.910112, 1, 1, 0.938333, 0.938333, 1, 1, 1, 1, 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+scale = Vector2( 0.75, 0.75 )
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 49.14
+direction = Vector2( 0, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 150.0
+angular_velocity = 117.0
+angular_velocity_random = 0.4
+orbit_velocity = 0.5
+scale_amount = 0.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+script = ExtResource( 2 )

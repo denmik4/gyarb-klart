@@ -1,5 +1,4 @@
 extends KinematicBody2D
-class_name MovableObjekt
 
 var direction_x = "RIGHT"
 var velocity := Vector2.ZERO
@@ -7,6 +6,8 @@ var direction := Vector2.ZERO
 var player = null
 var bug_fix = Vector2(1, 0)
 
+
+# kontrollerar om gubben uppfyller krav pusha objektet och ger den velocity ifall den gör det 
 func _physics_process(delta: float) -> void:
 	if player:
 		if player.can_push and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and player.state == 8:
@@ -20,6 +21,7 @@ func _physics_process(delta: float) -> void:
 				move_and_slide(velocity)
 
 
+#om gubben i arean då får gubben möjlighet att pusha objektet
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
@@ -31,7 +33,7 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		
 		
 
-
+# om gubben lämnar area kan den inte pusha objektet
 func _on_Area2D_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
 		player = null

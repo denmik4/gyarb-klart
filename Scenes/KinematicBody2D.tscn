@@ -654,7 +654,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[node name="Mästerkatten" type="KinematicBody2D" groups=["Player"]]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=["Player"]]
 collision_mask = 2
 script = ExtResource( 2 )
 
@@ -729,3 +729,9 @@ position = Vector2( 0, -30 )
 enabled = true
 cast_to = Vector2( -25, 0 )
 collision_mask = 2
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_CoyoteTimer_timeout"]

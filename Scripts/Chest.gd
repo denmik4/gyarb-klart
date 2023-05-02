@@ -13,9 +13,9 @@ func _on_Key_pickup():
 func open_chest():
 	animationplayer.play("OpenChest")
 
-
+# kontrollerar om gubben kan öppna kista
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player") and has_key == true:
 			open_chest()
 			yield(get_tree().create_timer(2), "timeout")
-			print("DU VANN!!!!!")
+			get_tree().change_scene("res://Scenes/WinScreen.tscn")

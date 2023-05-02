@@ -2,8 +2,9 @@ extends Label
 
 
 var time = 0
-var timer_on = false
 
+#func _ready() -> void:
+	#Globals.time = time
 
 func _process(delta):
 		time += delta 
@@ -15,4 +16,8 @@ func _process(delta):
 		
 		
 		var time_passed = "%02d : %02d : %02d" %  [mins,secs,mili]
-		text = time_passed# + " : " var2str(time"
+		text = time_passed
+		
+		Globals.time = time
+		
+

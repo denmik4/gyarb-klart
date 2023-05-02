@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Sickle.gd" type="Script" id=1]
+[ext_resource path="res://Enemy/Sickel.png" type="Texture" id=2]
+
+[sub_resource type="Environment" id=1]
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/5 = false
+glow_intensity = 8.0
+glow_strength = 1.99
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 47.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Rotation"
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 1 )
+
+[node name="Sickle" type="Area2D" parent="."]
+modulate = Color( 3, 3, 3, 1 )
+z_index = 3
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Sickle"]
+modulate = Color( 3.0625, 1, 4, 1 )
+position = Vector2( 15.5001, 9.99991 )
+scale = Vector2( 0.631817, 0.507813 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sickle"]
+visible = false
+position = Vector2( 24, 12 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Sickle"]
+visible = false
+position = Vector2( 10, 9 )
+scale = Vector2( 5.7, 5.8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sickle"]
+anims/Rotation = SubResource( 2 )
+
+[connection signal="body_entered" from="Sickle" to="Sickle" method="_on_Sickle_body_entered"]
+[connection signal="screen_entered" from="Sickle/VisibilityNotifier2D" to="Sickle" method="_on_VisibilityNotifier2D_screen_entered"]
